@@ -2,6 +2,10 @@
 
 container to generate letsencrypt certs using dehydrated + lexicon
 
+## Supported tags and Dockerfile links
+- [`latest` (*Dockerfile*)](https://github.com/willfarrell/docker-letsencrypt/blob/master/Dockerfile)
+
+
 ## Dockerfile
 Use to set your own defaults
 ```Dockerfile
