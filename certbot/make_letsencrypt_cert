@@ -1,0 +1,76 @@
+#!/bin/bash
+#set -x
+
+# ENV
+# NGINX_ENV
+# NGINX_DOMAIN
+# CERTBOT_EMAIL
+# CERTBOT_RENEW_PERIOD
+
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+function make {
+
+    CERTBOT_ARGS="--non-interactive \
+            --agree-tos \
+            --email ${CERTBOT_EMAIL} \
+            --no-self-upgrade \
+            --domain ${NGINX_DOMAIN} \
+            --keep-until-expiring \
+            --rsa-key-size 4096 \
+            --must-staple \
+            --csr /etc/ssl/csr.der \
+            --key-path /etc/ssl/privkey.pem \
+            --cert-path /etc/ssl/cert.pem \
+            --chain-path /etc/ssl/chain.pem \
+            --fullchain-path /etc/ssl/fullchain.pem"
+
+    if [ "${NGINX_ENV}" == "production" ]; then
+        # --quiet
+        CERTBOT_ARGS="${CERTBOT_ARGS}"
+    else
+        CERTBOT_ARGS="${CERTBOT_ARGS} --staging"
+    fi
+
+    RENEW=1
+
+    if [ ! -f /etc/ssl/privkey.pem ] || [ ! -f /etc/ssl/csr.der ]; then
+        echo "Generate new privkey and csr"
+        openssl ecparam -genkey -name secp384r1 > /etc/ssl/privkey.pem
+        # w/o --must-staple
+        #openssl req -new -sha256 -key /etc/ssl/privkey.pem -subj "/CN=${NGINX_DOMAIN}" -reqexts SAN -config <(cat /etc/ssl/openssl.cnf <(printf "[SAN]\nsubjectAltName=DNS:${NGINX_DOMAIN}")) -outform der -out /etc/ssl/csr.der
+        # w/ --must-staple https://community.letsencrypt.org/t/improving-revocation-will-lets-encrypt-support-ocsp-must-staple/4334/18
+        openssl req -new -sha256 -key /etc/ssl/privkey.pem -subj "/CN=${NGINX_DOMAIN}" -reqexts SAN -config <(cat /etc/ssl/openssl.cnf <(printf "[SAN]\nsubjectAltName=DNS:${NGINX_DOMAIN}\n1.3.6.1.5.5.7.1.24=DER:30:03:02:01:05")) -outform der -out /etc/ssl/csr.der
+        RENEW=0
+    fi
+
+    if  [ "${RENEW}" == "0" ] || [ ! -f /etc/ssl/cert.pem ]; then
+        echo "** New Cert **"
+        certbot-auto certonly ${CERTBOT_ARGS} \
+            --standalone
+    else
+        echo "** Renew Cert **"
+        # `certbot-auto renew` will not work with customer *.csr
+
+        # check is cert need renewing
+        RENEW_PERIOD=${CERTBOT_RENEW_PERIOD:=1296000} # 1296000 = 15*86400
+        if [ "$(openssl x509 -checkend ${RENEW_PERIOD} -in /etc/ssl/cert.pem | grep -c not)" -eq "1" ]; then
+            openssl x509 -enddate -noout -in /etc/ssl/cert.pem
+            return
+        fi
+
+        mv /etc/ssl/cert.pem /etc/ssl/cert_old.pem
+        mv /etc/ssl/chain.pem /etc/ssl/chain_old.pem
+        mv /etc/ssl/fullchain.pem /etc/ssl/fullchain_old.pem
+
+        certbot-auto certonly ${CERTBOT_ARGS} \
+            --webroot --webroot-path /var/www
+    fi
+
+}
+
+make
+
+${DIR}/make_hpkp
+
+service nginx reload >/dev/null 2>&1 || echo "nginx reload not needed"

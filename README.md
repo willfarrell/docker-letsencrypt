@@ -82,3 +82,5 @@ docker run -d \
 
 ## TODO
 - [ ] Update to python 3 (not-supported lexicon#68)
+
+`certbot/make_letsencrypt_cert` is an alternate method that one could use with the certbot docker image. However dns-01 is not supported.
