@@ -77,4 +77,3 @@ docker run -d \
 
 ## TODO
 - [ ] Update to python 3 (not-supported lexicon#68)
-- [ ] TravisCI
