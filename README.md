@@ -5,6 +5,7 @@ container to generate letsencrypt certs using dehydrated + lexicon
 ## Supported tags and Dockerfile links
 - [`latest` (*Dockerfile*)](https://github.com/willfarrell/docker-letsencrypt/blob/master/Dockerfile)
 
+[![](https://images.microbadger.com/badges/version/willfarrell/letsencrypt.svg)](http://microbadger.com/images/willfarrell/letsencrypt "Get your own version badge on microbadger.com")  [![](https://images.microbadger.com/badges/image/willfarrell/letsencrypt.svg)](http://microbadger.com/images/willfarrell/letsencrypt "Get your own image badge on microbadger.com")
 
 ## Dockerfile
 Use to set your own defaults
