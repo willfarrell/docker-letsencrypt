@@ -5,7 +5,7 @@ language: bash
 dist: trusty
 
 env:
-  - VERSION=0.3.1
+  - VERSION=latest
 
 services:
   - docker

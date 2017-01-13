@@ -1,11 +1,11 @@
 # docker-letsencrypt
 
-Creates ECDSA certs based on ENV
+container to generate letsencrypt certs using dehydrated + lexicon
 
 ## Dockerfile
 Use to set your own defaults
 ```Dockerfile
-FROM willfarrell/letsencrypt
+FROM willfarrell/letsencrypt:latest
 
 COPY config /etc/dehydrated/config
 ```
