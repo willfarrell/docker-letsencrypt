@@ -8,7 +8,7 @@ container to generate letsencrypt certs using dehydrated + lexicon
 [![](https://images.microbadger.com/badges/version/willfarrell/letsencrypt.svg)](http://microbadger.com/images/willfarrell/letsencrypt "Get your own version badge on microbadger.com")  [![](https://images.microbadger.com/badges/image/willfarrell/letsencrypt.svg)](http://microbadger.com/images/willfarrell/letsencrypt "Get your own image badge on microbadger.com")
 
 ## Dockerfile
-Use to set your own defaults
+Use to set your own defaults or overwrite in the command
 ```Dockerfile
 FROM willfarrell/letsencrypt:latest
 
@@ -28,7 +28,6 @@ LEXICON_CLOUDFLARE_TOKEN=
 ## Testing
 ```bash
 docker build -t letsencrypt .
-docker rm -f letsencrypt
 
 # private
 docker run \
@@ -36,19 +35,16 @@ docker run \
     letsencrypt \
     dehydrated \
         --cron --domain letsencrypt.willfarrell.ca \
-        --out /etc/ssl \
         --hook dehydrated-dns \
         --challenge dns-01 \
         --force
 
 # public
 docker run -d \
-    --volumes-from nginx_nginx_1 \
     --env-file letsencrypt.env \
     letsencrypt \
     dehydrated \
         --cron --domain letsencrypt.willfarrell.ca \
-        --out /etc/ssl \
         --challenge http-01 \
         --force
 
@@ -57,12 +53,13 @@ docker exec -it nginx_nginx_1 /etc/scripts/make_hpkp && /etc/init.d/nginx reload
 ```
 
 ## Deploy
+See https://github.com/willfarrell/docker-nginx for full example
 ```bash
 # private
 docker run \
     --volumes-from nginx_nginx_1 \
     --env-file letsencrypt.env \
-    letsencrypt \
+    willfarrell/letsencrypt \
     dehydrated \
         --cron --domain letsencrypt.willfarrell.ca \
         --out /etc/ssl \
@@ -73,14 +70,12 @@ docker run \
 docker run -d \
     --volumes-from nginx_nginx_1 \
     --env-file letsencrypt.env \
-    letsencrypt \
+    willfarrell/letsencrypt \
     dehydrated \
         --cron --domain letsencrypt.willfarrell.ca \
         --out /etc/ssl \
         --challenge http-01
 ```
 
-## TODO
-- [ ] Update to python 3 (not-supported lexicon#68)
 
-`certbot/make_letsencrypt_cert` is an alternate method that one could use with the certbot docker image. However dns-01 is not supported.
+Note: `certbot/make_letsencrypt_cert` is an alternate method that one could use with the certbot docker image. However dns-01 is not supported.
