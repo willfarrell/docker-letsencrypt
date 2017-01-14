@@ -7,6 +7,10 @@ container to generate letsencrypt certs using dehydrated + lexicon
 
 [![](https://images.microbadger.com/badges/version/willfarrell/letsencrypt.svg)](http://microbadger.com/images/willfarrell/letsencrypt "Get your own version badge on microbadger.com")  [![](https://images.microbadger.com/badges/image/willfarrell/letsencrypt.svg)](http://microbadger.com/images/willfarrell/letsencrypt "Get your own image badge on microbadger.com")
 
+## Docs
+- https://github.com/lukas2511/dehydrated
+- https://github.com/AnalogJ/lexicon
+
 ## Dockerfile
 Use to set your own defaults or overwrite in the command
 ```Dockerfile
