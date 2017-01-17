@@ -24,9 +24,15 @@ COPY config /etc/dehydrated/config
 # defaults to `staging`, use `production` when ready.
 LE_ENV=staging
 # Only required if you plan to use dns-01 challenges (use for private services)
+# CloudFlare example
 PROVIDER=cloudflare
 LEXICON_CLOUDFLARE_USERNAME=
 LEXICON_CLOUDFLARE_TOKEN=
+
+# Route 53 example
+PROVIDER=route53
+LEXICON_ROUTE53_ACCESS_KEY=
+LEXICON_ROUTE53_ACCESS_SECRET=
 ```
 
 ## Testing
@@ -81,5 +87,23 @@ docker run -d \
         --challenge http-01
 ```
 
+## Route53 Access Policy
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "route53:ListHostedZonesByName",
+                "route53:ChangeResourceRecordSets"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}
+```
 
 Note: `certbot/make_letsencrypt_cert` is an alternate method that one could use with the certbot docker image. However dns-01 is not supported.

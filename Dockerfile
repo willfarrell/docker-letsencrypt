@@ -1,10 +1,11 @@
 FROM library/alpine:3.5
 
 # deps - python openssl curl sed grep mktemp
+# boto 3 - AWS SDK for python
 RUN apk add --no-cache --virtual .build-deps git \
     && apk add --no-cache --virtual .dehydrated-rundeps python py2-pip bash openssl curl \
     && pip install --upgrade pip \
-    && pip install dns-lexicon dns-lexicon[route53] dns-lexicon[transip] \
+    && pip install dns-lexicon boto3 dns-lexicon[route53] dns-lexicon[transip] \
     && cd /tmp \
     && git clone https://github.com/lukas2511/dehydrated.git --depth 1 \
     && chmod a+x dehydrated/dehydrated \
