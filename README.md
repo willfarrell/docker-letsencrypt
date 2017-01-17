@@ -64,6 +64,8 @@ docker exec -it nginx_nginx_1 /etc/scripts/make_hpkp && /etc/init.d/nginx reload
 
 ## Deploy
 See https://github.com/willfarrell/docker-nginx for full example
+
+Note the use of `--hook dehydrated-dns`, [dehydrated-dns](https://github.com/AnalogJ/lexicon/blob/master/examples/dehydrated.default.sh) is a script wrapper to call lexicon from dehydrated.
 ```bash
 # private
 docker run \
