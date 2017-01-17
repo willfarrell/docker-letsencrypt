@@ -10,6 +10,7 @@ container to generate letsencrypt certs using dehydrated + lexicon
 ## Docs
 - https://github.com/lukas2511/dehydrated
 - https://github.com/AnalogJ/lexicon
+- https://github.com/willfarrell/docker-nginx
 
 ## Dockerfile
 Use to set your own defaults or overwrite in the command
@@ -58,18 +59,15 @@ docker run -d \
         --challenge http-01 \
         --force
 
-# reload nginx
-docker exec -it nginx_nginx_1 /etc/scripts/make_hpkp && /etc/init.d/nginx reload                                                                          
+# reload nginx to see changes                                                                         
 ```
 
 ## Deploy
-See https://github.com/willfarrell/docker-nginx for full example
-
 Note the use of `--hook dehydrated-dns`, [dehydrated-dns](https://github.com/AnalogJ/lexicon/blob/master/examples/dehydrated.default.sh) is a script wrapper to call lexicon from dehydrated.
 ```bash
 # private
 docker run \
-    --volumes-from nginx_nginx_1 \
+    --volumes-from docker_nginx_1 \
     --env-file letsencrypt.env \
     willfarrell/letsencrypt \
     dehydrated \
@@ -80,7 +78,7 @@ docker run \
 
 # public
 docker run -d \
-    --volumes-from nginx_nginx_1 \
+    --volumes-from docker_nginx_1 \
     --env-file letsencrypt.env \
     willfarrell/letsencrypt \
     dehydrated \
