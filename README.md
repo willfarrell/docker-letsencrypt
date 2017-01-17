@@ -107,5 +107,3 @@ docker run -d \
     ]
 }
 ```
-
-Note: `certbot/make_letsencrypt_cert` is an alternate method that one could use with the certbot docker image. However dns-01 is not supported.
