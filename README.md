@@ -105,3 +105,6 @@ docker run -d \
     ]
 }
 ```
+
+## Staging Certificate
+https://letsencrypt.org/docs/staging-environment/
