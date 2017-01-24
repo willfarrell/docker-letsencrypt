@@ -6,7 +6,7 @@ FROM library/alpine:3.5
 # boto3 - AWS SDK for python
 RUN apk add --no-cache --virtual .build-deps git \
     && apk add --no-cache --virtual .dehydrated-rundeps python3 bash openssl curl \
-    && pip3 install --upgrade pip boto3 dns-lexicon==1.2.1 dns-lexicon[route53]==1.2.1 dns-lexicon[transip]==1.2.1 \
+    && pip3 install --upgrade pip boto3 dns-lexicon==1.2.2 dns-lexicon[route53]==1.2.2 dns-lexicon[transip]==1.2.2 \
     && rm -r /root/.cache \
 
     && cd /tmp \
