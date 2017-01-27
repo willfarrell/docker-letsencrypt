@@ -95,11 +95,19 @@ docker run -d \
         {
             "Effect": "Allow",
             "Action": [
-                "route53:ListHostedZonesByName",
-                "route53:ChangeResourceRecordSets"
+                "route53:ListHostedZonesByName"
             ],
             "Resource": [
                 "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "route53:ChangeResourceRecordSets"
+            ],
+            "Resource": [
+                "arn:aws:route53:::hostedzone/${HOSTED_ZONE_ID}"
             ]
         }
     ]
