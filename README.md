@@ -86,6 +86,7 @@ docker run -d \
         --out /etc/ssl \
         --challenge http-01
 ```
+Also worth reading is Let's Encrypts document on certificate rate limits https://letsencrypt.org/docs/rate-limits/. In short you can generate 5 duplicate certificates per 7 days.
 
 ## Route53 Access Policy
 ```json
@@ -115,4 +116,14 @@ docker run -d \
 ```
 
 ## Staging Certificate
-https://letsencrypt.org/docs/staging-environment/
+Staging certificates are not natively trusted. If you'd like to prevent the security messages in the browser;
+
+1. Download [`Fake LE Intermediate X1`](https://letsencrypt.org/docs/staging-environment/).
+2. Open `Applications` -> `Utilities` -> `Keychain Access`.
+3. Click on `Certificates`.
+4. Drag `fakeleintermediatex1.pem` into the window to add it.
+5. Double click `Fake LE Intermediate X1`.
+6. Window will pop open. Under the `Trust` section, set `When using this certificate` to `Always Trust`.
+7. Close window. Confirm window will pop open. Enter password and click `Update Settings`.
+
+There should now be a blue and white plus icon associated with the certificate.
