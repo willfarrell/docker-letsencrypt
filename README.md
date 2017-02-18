@@ -118,6 +118,7 @@ Also worth reading is Let's Encrypts document on certificate rate limits https:/
 ## Staging Certificate
 Staging certificates are not natively trusted. If you'd like to prevent the security messages in the browser;
 
+### Mac
 1. Download [`Fake LE Intermediate X1`](https://letsencrypt.org/docs/staging-environment/).
 2. Open `Applications` -> `Utilities` -> `Keychain Access`.
 3. Click on `Certificates`.
@@ -127,3 +128,12 @@ Staging certificates are not natively trusted. If you'd like to prevent the secu
 7. Close window. Confirm window will pop open. Enter password and click `Update Settings`.
 
 There should now be a blue and white plus icon associated with the certificate.
+
+### iOS
+1. Go to https://letsencrypt.org/docs/staging-environment click on `Fake LE Intermediate X1`.
+2. You will be redirected to an `Install Profile` page. Click `Install`.
+3. Enter device password.
+4. Click `Install`, and `Install` again.
+5. Click `Done`.
+
+To view the certificate got to `Settings` -> `General` -> `Profile`.
