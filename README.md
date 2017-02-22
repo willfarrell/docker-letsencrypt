@@ -119,7 +119,7 @@ Also worth reading is Let's Encrypts document on certificate rate limits https:/
 Staging certificates are not natively trusted. If you'd like to prevent the security messages in the browser;
 
 ### Mac
-1. Download [`Fake LE Intermediate X1`](https://letsencrypt.org/docs/staging-environment/).
+1. Download [`Fake LE Intermediate X1`](https://letsencrypt.org/docs/staging-environment).
 2. Open `Applications` -> `Utilities` -> `Keychain Access`.
 3. Click on `Certificates`.
 4. Drag `fakeleintermediatex1.pem` into the window to add it.
@@ -139,4 +139,4 @@ There should now be a blue and white plus icon associated with the certificate. 
 To view the certificate got to `Settings` -> `General` -> `Profile`.
 
 ## Android
-https://www.globalsign.com/en/blog/installing-certificates-onto-android-devices/
+https://support.google.com/nexus/answer/2844832?hl=en
