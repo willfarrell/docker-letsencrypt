@@ -127,7 +127,7 @@ Staging certificates are not natively trusted. If you'd like to prevent the secu
 6. Window will pop open. Under the `Trust` section, set `When using this certificate` to `Always Trust`.
 7. Close window. Confirm window will pop open. Enter password and click `Update Settings`.
 
-There should now be a blue and white plus icon associated with the certificate.
+There should now be a blue and white plus icon associated with the certificate. You may need to restart your browser before the change takes effect.
 
 ### iOS
 1. Go to https://letsencrypt.org/docs/staging-environment click on `Fake LE Intermediate X1`.
@@ -137,3 +137,6 @@ There should now be a blue and white plus icon associated with the certificate.
 5. Click `Done`.
 
 To view the certificate got to `Settings` -> `General` -> `Profile`.
+
+## Android
+https://www.globalsign.com/en/blog/installing-certificates-onto-android-devices/
