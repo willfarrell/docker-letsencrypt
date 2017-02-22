@@ -25,4 +25,7 @@ COPY config /etc/dehydrated/config
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
+HEALTHCHECK --interval=5s --timeout=3s \
+    CMD ps aux | grep '[d]ehydrated' || exit 1
+
 CMD ["dehydrated","-h"]
