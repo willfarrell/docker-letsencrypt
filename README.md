@@ -139,4 +139,5 @@ There should now be a blue and white plus icon associated with the certificate. 
 To view the certificate got to `Settings` -> `General` -> `Profile`.
 
 ## Android
-https://support.google.com/nexus/answer/2844832?hl=en
+- https://support.google.com/nexus/answer/2844832?hl=en
+- https://www.globalsign.com/en/blog/installing-certificates-onto-android-devices/
