@@ -22,6 +22,8 @@ COPY config /etc/dehydrated/config
 
 ## ENV
 ```
+# Optional. Used to enable logging to file `/var/log/letsencrypt/runtime.log`.
+LOG=TRUE
 # defaults to `staging`, use `production` when ready.
 LE_ENV=staging
 # Only required if you plan to use dns-01 challenges (use for private services)
