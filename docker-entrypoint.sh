@@ -9,8 +9,8 @@ if [ "${LOG}" == "TRUE" ]; then
 	touch ${LOG_FILE}
 
 	UUID=$(cat /proc/sys/kernel/random/uuid)
-	exec > >(read message; echo "$(date -Iseconds) ${UUID} [info] $message" | tee -a ${LOG_FILE} )
-	exec 2> >(read message; echo "$(date -Iseconds) ${UUID} [error] $message" | tee -a ${LOG_FILE} >&2)
+	exec > >(read message; echo "${UUID} $(date -Iseconds) [info] $message" | tee -a ${LOG_FILE} )
+	exec 2> >(read message; echo "${UUID} $(date -Iseconds) [error] $message" | tee -a ${LOG_FILE} >&2)
 fi
 
 if [ "${LE_ENV}" == 'production' ]; then
