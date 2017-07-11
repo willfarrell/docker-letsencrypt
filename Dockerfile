@@ -10,10 +10,16 @@ RUN apk add --no-cache --virtual .build-deps git \
     && rm -r /root/.cache \
 
     && cd /tmp \
-    && git clone https://github.com/lukas2511/dehydrated.git --depth 1 \
+    && git clone https://github.com/lukas2511/dehydrated.git \
+    && cd dehydrated \
+    && git checkout tags/v0.4.0 \
+    && cd .. \
     && chmod a+x dehydrated/dehydrated \
     && mv dehydrated/dehydrated /usr/bin/ \
-    && git clone https://github.com/AnalogJ/lexicon.git --depth 1 \
+    && git clone https://github.com/AnalogJ/lexicon.git \
+    && cd lexicon \
+    && git checkout tags/v2.1.8 \
+    && cd .. \
     && chmod a+x lexicon/examples/dehydrated.default.sh \
     && mv lexicon/examples/dehydrated.default.sh /usr/bin/dehydrated-dns \
     && rm -rf /tmp/* \

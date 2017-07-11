@@ -26,6 +26,8 @@ COPY config /etc/dehydrated/config
 LOG=TRUE
 # defaults to `staging`, use `production` when ready.
 LE_ENV=staging
+# CSV list of domains
+LE_DOMAIN=
 # Only required if you plan to use dns-01 challenges (use for private services)
 # CloudFlare example
 PROVIDER=cloudflare
@@ -47,7 +49,8 @@ docker run \
     --env-file letsencrypt.env \
     letsencrypt \
     dehydrated \
-        --cron --domain letsencrypt.willfarrell.ca \
+        --cron --accept-terms \
+        --domain letsencrypt.willfarrell.ca \
         --hook dehydrated-dns \
         --challenge dns-01 \
         --force
@@ -57,7 +60,8 @@ docker run -d \
     --env-file letsencrypt.env \
     letsencrypt \
     dehydrated \
-        --cron --domain letsencrypt.willfarrell.ca \
+        --cron --accept-terms \
+        --domain letsencrypt.willfarrell.ca \
         --challenge http-01 \
         --force
 

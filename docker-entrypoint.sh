@@ -20,5 +20,12 @@ else
 	echo "***** staging *****"
 fi
 
+# comma = new line
+if [ "${LE_DOMAIN}" ]; then
+    echo "***** Creating domains.txt *****"
+    echo ${LE_DOMAIN} | sed -e $'s/,/\\\n/g' > /etc/dehydrated/domains.txt
+    cat /etc/dehydrated/domains.txt
+fi
+
 echo "${@}"
 exec "${@}"
