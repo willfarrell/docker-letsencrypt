@@ -14,14 +14,17 @@ if [ "${LOG}" == "TRUE" ]; then
 fi
 
 if [ "${LE_ENV}" == 'production' ]; then
-	echo "***** ${LE_ENV} *****"
+	echo "***** production *****"
 	sed -i 's@CA=.*@CA="https://acme-v01.api.letsencrypt.org/directory"@g' /etc/dehydrated/config
 else
 	echo "***** staging *****"
 fi
 
 # comma = new line
-if [ "${LE_DOMAIN}" ]; then
+if [ -z ${LE_DOMAIN+x} ]; then
+    echo "***** Skipping domains.txt *****"
+    echo "Ensure --domain arg is set"
+else
     echo "***** Creating domains.txt *****"
     echo ${LE_DOMAIN} | sed -e $'s/,/\\\n/g' > /etc/dehydrated/domains.txt
     cat /etc/dehydrated/domains.txt
