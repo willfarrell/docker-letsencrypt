@@ -15,7 +15,7 @@ fi
 
 if [ "${LE_ENV}" == 'production' ]; then
 	echo "***** production *****"
-	sed -i 's@CA=.*@CA="https://acme-v01.api.letsencrypt.org/directory"@g' /etc/dehydrated/config
+	sed -i 's@CA=.*@CA="https://acme-v02.api.letsencrypt.org/directory"@g' /etc/dehydrated/config
 else
 	echo "***** staging *****"
 fi

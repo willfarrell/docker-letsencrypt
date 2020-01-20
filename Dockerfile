@@ -1,4 +1,4 @@
-FROM library/alpine:3.5
+FROM library/alpine:3.11
 
 # Credit: @frol for python3 - https://github.com/frol/docker-alpine-python3/blob/master/Dockerfile
 
@@ -12,13 +12,13 @@ RUN apk add --no-cache --virtual .build-deps git \
     && cd /tmp \
     && git clone https://github.com/lukas2511/dehydrated.git \
     && cd dehydrated \
-    && git checkout tags/v0.4.0 \
+    && git checkout tags/v0.6.5 \
     && cd .. \
     && chmod a+x dehydrated/dehydrated \
     && mv dehydrated/dehydrated /usr/bin/ \
     && git clone https://github.com/AnalogJ/lexicon.git \
     && cd lexicon \
-    && git checkout tags/v2.1.8 \
+    && git checkout tags/v3.3.17 \
     && cd .. \
     && chmod a+x lexicon/examples/dehydrated.default.sh \
     && mv lexicon/examples/dehydrated.default.sh /usr/bin/dehydrated-dns \
