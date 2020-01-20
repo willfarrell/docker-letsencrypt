@@ -4,8 +4,8 @@ FROM library/alpine:3.11
 
 # deps - python3 openssl curl sed grep mktemp
 # boto3 - AWS SDK for python
-RUN apk add --no-cache --virtual .build-deps git \
-    && apk add --no-cache --virtual .dehydrated-rundeps python3 bash openssl curl \
+RUN apk add --no-cache --virtual .build-deps git build-base libffi-dev openssl-dev \
+    && apk add --no-cache --virtual .dehydrated-rundeps python3-dev bash openssl curl \
     && pip3 install --upgrade pip boto3 dns-lexicon dns-lexicon[route53] dns-lexicon[transip] \
     && rm -r /root/.cache \
 
